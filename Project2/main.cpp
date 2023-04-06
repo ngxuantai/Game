@@ -43,13 +43,13 @@
 #define TEXTURE_PATH_RUNMAN TEXTURES_DIR "\\run_man.png"
 #define TEXTURE_PATH_GROUND TEXTURES_DIR "\\ground.png"
 
-#define PLAYER_START_X 200.0f
+#define PLAYER_START_X 10.0f
 #define PLAYER_START_Y 10.0f
 
 
 #define RUNMAN_START_X 10.0f
-#define RUNMAN_START_Y 110.0f
-#define RUNMAN_START_VX 0.1f
+#define RUNMAN_START_Y 80.0f
+#define RUNMAN_START_VX 0.05f
 
 #define GROUNDX 16.0f
 #define GROUNDY GROUND + 32.0f
@@ -159,7 +159,7 @@ void LoadResources()
 	LPTEXTURE texPlayerStand = textures->Get(ID_TEX_PLAYER_STAND);
 
 	////LIE
-	sprites->Add(10031, 134, 29, 170, 46, texPlayerStand);
+	sprites->Add(10031, 134, 29, 169, 46, texPlayerStand);
 
 	ani = new CAnimation(100);
 	ani->Add(10031);
@@ -174,8 +174,8 @@ void LoadResources()
 	sprites->Add(10044, 74, 0, 94, 35, texRunMan);
 	sprites->Add(10045, 97, 0, 117, 35, texRunMan);
 	sprites->Add(10046, 121, 0, 141, 35, texRunMan);
-	sprites->Add(10047, 146, 0, 166, 35, texRunMan);
-	sprites->Add(10048, 169, 0, 189, 35, texRunMan);
+	/*sprites->Add(10047, 146, 0, 166, 35, texRunMan);
+	sprites->Add(10048, 169, 0, 189, 35, texRunMan);*/
 
 	ani = new CAnimation(100);
 	ani->Add(10041);
@@ -184,8 +184,8 @@ void LoadResources()
 	ani->Add(10044);
 	ani->Add(10045);
 	ani->Add(10046);
-	ani->Add(10047);
-	ani->Add(10048);
+	/*ani->Add(10047);
+	ani->Add(10048);*/
 	animations->Add(ID_ANI_RUNMAN_RUNNING, ani);
 
 	//TEXGROUND
@@ -197,16 +197,27 @@ void LoadResources()
 	ani->Add(10051);
 	animations->Add(ID_ANI_GROUND, ani);
 
-	player = new CPlayer(PLAYER_START_X, PLAYER_START_Y);
-	objects.push_back(player);
-	runMan = new CRunMan(RUNMAN_START_X, RUNMAN_START_Y, RUNMAN_START_VX);
-	objects.push_back(runMan);
 
 	for (int i = 0; i < 50; i++)
 	{
 		ground = new CGround(GROUNDX + i * 31, GROUNDY);
 		objects.push_back(ground);
 	}
+
+	/*int BackBufferWidth = CGame::GetInstance()->GetBackBufferWidth();
+	for (int i = 0; i < 50; i++)
+	{
+		if (i * 31 > BackBufferWidth)
+			break;
+		ground = new CGround(RUNMAN_START_X + i * 31 + 100, RUNMAN_START_Y + 35);
+		objects.push_back(ground);
+	}*/
+
+	player = new CPlayer(PLAYER_START_X, PLAYER_START_Y);
+	objects.push_back(player);
+	runMan = new CRunMan(RUNMAN_START_X, RUNMAN_START_Y, RUNMAN_START_VX);
+	objects.push_back(runMan);
+
 }
 
 /*

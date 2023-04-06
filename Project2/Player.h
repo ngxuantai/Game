@@ -5,7 +5,7 @@
 #include "Animation.h"
 #include "Animations.h"
 
-#define PLAYER_WIDTH 20
+#define PLAYER_WIDTH 10
 
 #define PLAYER_SPEED		0.1f
 //#define PLAYER_RUNNING_SPEED		0.2f
