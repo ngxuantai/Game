@@ -57,14 +57,14 @@
 #define GROUNDX 16.0f
 #define GROUNDY GROUND + 32.0f
 
-#define ROCKMOVE_START_X 10.0f
+#define ROCKMOVE_START_X 250.0f
 #define ROCKMOVE_START_Y 80.0f
 #define ROCKMOVE_START_VY 0.05f
 
 CPlayer* player = NULL;
-CRunMan* runMan;
-CGround* ground;
-CRockMove* rockMove;
+CRunMan* runMan = NULL;
+CGround* ground = NULL;
+CRockMove* rockMove = NULL;
 
 CSampleKeyHandler* keyHandler;
 
