@@ -30,14 +30,28 @@ void CRockMove::Update(DWORD dt)
 void CRockMove::Render()
 {
 	CAnimations* animations = CAnimations::GetInstance();
-	int aniId = -1;
-	
-	aniId = ID_ANI_ROCKMOVE;
+	animations->Get(ID_ANI_ROCKMOVE)->Render(x, y);
+}
 
-	float d = 0;
-	/*if (isLying) d = PLAYER_LIE_HEIGHT_ADJUST;*/
+CRockRoll::CRockRoll(float x, float y, float vx) :CGameObject(x, y)
+{
+	this->vx = vx;
+}
 
-	animations->Get(aniId)->Render(x, y + d);
+void CRockRoll::Update(DWORD dt)
+{
+	x += -vx * dt;
+
+	int BackBufferWidth = CGame::GetInstance()->GetBackBufferWidth();
+	if (x <= 0) {
+		x = BackBufferWidth;
+	}
+}
+
+void CRockRoll::Render()
+{
+	CAnimations* ani = CAnimations::GetInstance();
+	ani->Get(ID_ANI_ROCKROLL)->Render(x, y);
 }
 
 

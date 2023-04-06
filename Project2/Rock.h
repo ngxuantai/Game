@@ -14,6 +14,7 @@
 #define ROCKMOVE_STATE_MOVE 100
 
 #define ID_ANI_ROCKMOVE 1010
+#define ID_ANI_ROCKROLL 3000
 
 
 class CRockMove : public CGameObject
@@ -21,6 +22,15 @@ class CRockMove : public CGameObject
 public:
 	CRockMove(float x, float y) : CGameObject(x, y) {}
 	CRockMove(float x, float y, float vy);
+	void Render();
+	void Update(DWORD dt);
+};
+
+class CRockRoll : public CGameObject
+{
+public:
+	CRockRoll(float x, float y) : CGameObject(x, y) {}
+	CRockRoll(float x, float y, float vx);
 	void Render();
 	void Update(DWORD dt);
 };

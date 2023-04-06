@@ -35,6 +35,7 @@
 #define ID_TEX_RUNMAN 30
 #define ID_TEX_GROUND 100
 #define ID_TEX_ROCKMOVE 110
+#define ID_TEX_ROCKROLL 3000
 
 //#define ID_SPRITE_BRICK 20001
 
@@ -45,6 +46,7 @@
 #define TEXTURE_PATH_RUNMAN TEXTURES_DIR "\\run_man.png"
 #define TEXTURE_PATH_GROUND TEXTURES_DIR "\\ground.png"
 #define TEXTURE_PATH_ROCKMOVE TEXTURES_DIR "\\rock_move.png"
+#define TEXTURE_PATH_ROCKROLL TEXTURES_DIR "\\rock_roll.png"
 
 #define PLAYER_START_X 10.0f
 #define PLAYER_START_Y 10.0f
@@ -64,7 +66,8 @@
 CPlayer* player = NULL;
 CRunMan* runMan = NULL;
 CGround* ground = NULL;
-CRockMove* rockMove = NULL;
+CRockMove* rockmove = NULL;
+CRockRoll* rockroll = NULL;
 
 CSampleKeyHandler* keyHandler;
 
@@ -97,6 +100,7 @@ void LoadResources()
 	textures->Add(ID_TEX_RUNMAN, TEXTURE_PATH_RUNMAN);
 	textures->Add(ID_TEX_GROUND, TEXTURE_PATH_GROUND);
 	textures->Add(ID_TEX_ROCKMOVE, TEXTURE_PATH_ROCKMOVE);
+	textures->Add(ID_TEX_ROCKROLL, TEXTURE_PATH_ROCKROLL);
 
 	CSprites* sprites = CSprites::GetInstance();
 	CAnimations* animations = CAnimations::GetInstance();
@@ -217,6 +221,22 @@ void LoadResources()
 	ani->Add(10061);
 	animations->Add(ID_ANI_ROCKMOVE, ani);
 
+	//TEXROCKROLL
+	LPTEXTURE texRockRoll = textures->Get(ID_TEX_ROCKROLL);
+
+	sprites->Add(ID_TEX_ROCKROLL, 0, 0, 27, 26, texRockRoll);
+	/*sprites->Add(ID_TEX_ROCKROLL + 1, 28, 0, 55, 27, texRockRoll);
+	sprites->Add(ID_TEX_ROCKROLL + 2, 56, 0, 83, 27, texRockRoll);*/
+	sprites->Add(ID_TEX_ROCKROLL + 3, 84, 0, 111, 26, texRockRoll);
+	sprites->Add(ID_TEX_ROCKROLL + 4, 112, 0, 140, 26, texRockRoll);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_TEX_ROCKROLL);
+	/*ani->Add(ID_TEX_ROCKROLL + 1);
+	ani->Add(ID_TEX_ROCKROLL + 2);*/
+	ani->Add(ID_TEX_ROCKROLL + 3);
+	ani->Add(ID_TEX_ROCKROLL + 4);
+	animations->Add(ID_ANI_ROCKROLL, ani);
 
 
 	for (int i = 0; i < 50; i++)
@@ -224,6 +244,10 @@ void LoadResources()
 		ground = new CGround(GROUNDX + i * 31, GROUNDY);
 		objects.push_back(ground);
 	}
+
+	int BackBufferWidth = CGame::GetInstance()->GetBackBufferWidth();
+	rockroll = new CRockRoll(BackBufferWidth, GROUND + 3.0f, 0.05f);
+	objects.push_back(rockroll);
 
 	/*int BackBufferWidth = CGame::GetInstance()->GetBackBufferWidth();
 	for (int i = 0; i < 50; i++)
@@ -238,8 +262,8 @@ void LoadResources()
 	objects.push_back(player);
 	runMan = new CRunMan(RUNMAN_START_X, RUNMAN_START_Y, RUNMAN_START_VX);
 	objects.push_back(runMan);
-	rockMove = new CRockMove(ROCKMOVE_START_X, ROCKMOVE_START_Y, ROCKMOVE_START_VY);
-	objects.push_back(rockMove);
+	rockmove = new CRockMove(ROCKMOVE_START_X, ROCKMOVE_START_Y, ROCKMOVE_START_VY);
+	objects.push_back(rockmove);
 }
 
 /*
