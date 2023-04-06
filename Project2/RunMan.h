@@ -37,14 +37,12 @@
 
 class CRunMan : public CGameObject
 {
-	boolean isLying;
 	float maxVx;
 	float ax;
 	float vx;
 public:
 	CRunMan(float x, float y) : CGameObject(x, y)
 	{
-		isLying = false;
 		maxVx = 0.0f;
 		ax = 0.0f;
 	}

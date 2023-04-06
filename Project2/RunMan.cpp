@@ -85,13 +85,11 @@ void CRunMan::SetState(int state) {
 	switch (state)
 	{
 	case RUNMAN_STATE_RUNNING_RIGHT:
-		if (isLying) break;
 		maxVx = RUNMAN_SPEED;
 		ax = RUNMAN_ACCEL_RUN_X;
 		nx = 1;
 		break;
 	case RUNMAN_STATE_RUNNING_LEFT:
-		if (isLying) break;
 		maxVx = -RUNMAN_SPEED;
 		ax = -RUNMAN_ACCEL_RUN_X;
 		nx = -1;
