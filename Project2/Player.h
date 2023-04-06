@@ -1,0 +1,113 @@
+#pragma once
+
+#include "GameObject.h"
+
+#include "Animation.h"
+#include "Animations.h"
+
+#define PLAYER_WIDTH 20
+
+#define PLAYER_SPEED		0.1f
+//#define PLAYER_RUNNING_SPEED		0.2f
+
+#define PLAYER_ACCEL_RUN_X	0.0005f
+//#define MARIO_ACCEL_RUN_X	0.0007f
+
+#define PLAYER_JUMP_SPEED_Y		0.5f
+//#define MARIO_JUMP_RUN_SPEED_Y	0.6f
+
+#define PLAYER_GRAVITY			0.002f
+
+#define PLAYER_STATE_IDLE			0			
+#define PLAYER_STATE_RUNNING_RIGHT	100
+#define PLAYER_STATE_RUNNING_LEFT	200
+
+#define PLAYER_STATE_JUMP			300
+//#define PLAYER_STATE_RELEASE_JUMP    301
+
+//#define MARIO_STATE_RUNNING_RIGHT	400
+//#define MARIO_STATE_RUNNING_LEFT	500
+
+#define PLAYER_STATE_RUN_FIRE_RIGHT 400
+#define PLAYER_STATE_RUN_FIRE_UP_RIGHT 401
+#define PLAYER_STATE_RUN_FIRE_HALF_UP_RIGHT 402
+#define PLAYER_STATE_RUN_FIRE_HALF_DOWN_RIGHT 403
+
+#define PLAYER_STATE_RUN_FIRE_LEFT 410
+#define PLAYER_STATE_RUN_FIRE_UP_LEFT 411
+#define PLAYER_STATE_RUN_FIRE_HALF_UP_LEFT 410
+#define PLAYER_STATE_RUN_FIRE_HALF_DOWN_LEFT 413
+
+#define PLAYER_STATE_LIE				500
+#define PLAYER_STATE_LIE_RELEASE		501 
+
+
+#define PLAYER_STATE_SWIM_RIGHT 600
+#define PLAYER_STATE_SWIM_FIRE_UP_RIGHT 601
+#define PLAYER_STATE_SWIM_FIRE_HALF_UP_RIGHT 602
+
+#define PLAYER_STATE_SWIM_LEFT 610
+#define PLAYER_STATE_SWIM_FIRE_UP_LEFT 611
+#define PLAYER_STATE_SWIM_FIRE_HALF_UP_LEFT 612
+
+#define PLAYER_STATE_DIE 700
+
+
+
+
+#pragma region ANIMATION_ID
+
+#define ID_ANI_PLAYER_IDLE 400
+
+//#define ID_ANI_MARIO_WALKING_RIGHT 500
+//#define ID_ANI_MARIO_WALKING_LEFT 501
+
+#define ID_ANI_PLAYER_RUNNING 600
+#define ID_ANI_PLAYER_RUN_FIRE 601
+#define ID_ANI_PLAYER_RUN_FIRE_UP 602
+#define ID_ANI_PLAYER_RUN_FIRE_HALF_UP 603
+#define ID_ANI_PLAYER_RUN_FIRE_HALF_DOWN 604
+//#define ID_ANI_PLAYER_RUNNING_LEFT 601
+
+#define ID_ANI_PLAYER_JUMP 700
+//#define ID_ANI_MARIO_JUMP_WALK_LEFT 701
+//
+//#define ID_ANI_MARIO_JUMP_RUN_RIGHT 800
+//#define ID_ANI_MARIO_JUMP_RUN_LEFT 801
+
+#define ID_ANI_PLAYER_LIE 900
+//#define ID_ANI_MARIO_SIT_LEFT 901
+
+//#define ID_ANI_MARIO_BRACE_RIGHT 1000
+//#define ID_ANI_MARIO_BRACE_LEFT 1001
+
+#define ID_ANI_PLAYER_SWIM 1000
+#define ID_ANI_PLAYER_SWIM_FIRE_UP 1001
+#define ID_ANI_PLAYER_SWIM_FIRE_HALF_UP 1002
+
+#define ID_ANI_PLAYER_DIE 1100
+#pragma endregion
+
+
+//#define GROUND_Y 160.0f
+#define PLAYER_LIE_HEIGHT_ADJUST 4.0f
+
+class CPlayer : public CGameObject
+{
+	boolean isLying;
+	float maxVx;
+	float ax;
+public:
+	CPlayer(float x, float y) : CGameObject(x, y)
+	{
+		isLying = false;
+		maxVx = 0.0f;
+		ax = 0.0f;
+	}
+	void Update(DWORD dt);
+	void Render();
+	void SetState(int state);
+};
+
+
+
