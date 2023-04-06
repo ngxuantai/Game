@@ -1,13 +1,3 @@
-/* =============================================================
-	INTRODUCTION TO GAME PROGRAMMING SE102
-
-	SAMPLE 03 - KEYBOARD AND OBJECT STATE
-
-	This sample illustrates how to:
-
-		1/ Process keyboard input
-		2/ Control object state with keyboard events
-================================================================ */
 
 #include <windows.h>
 
@@ -28,8 +18,8 @@
 
 #include "SampleKeyEventHandler.h"
 
-#define WINDOW_CLASS_NAME L"SampleWindow"
-#define MAIN_WINDOW_TITLE L"03 - Keyboard and Mario states"
+#define WINDOW_CLASS_NAME L"Contra"
+#define MAIN_WINDOW_TITLE L"Contra"
 #define WINDOW_ICON_PATH L"mario.ico"
 
 
@@ -267,7 +257,7 @@ HWND CreateGameWindow(HINSTANCE hInstance, int nCmdShow, int ScreenWidth, int Sc
 	wc.lpfnWndProc = (WNDPROC)WinProc;
 	wc.cbClsExtra = 0;
 	wc.cbWndExtra = 0;
-	wc.hIcon = (HICON)LoadImage(hInstance, WINDOW_ICON_PATH, IMAGE_ICON, 0, 0, LR_LOADFROMFILE);;
+	wc.hIcon = (HICON)LoadImage(hInstance, WINDOW_ICON_PATH, IMAGE_ICON, 0, 0, LR_LOADFROMFILE);
 	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
 	wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
 	wc.lpszMenuName = NULL;
