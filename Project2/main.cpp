@@ -14,6 +14,7 @@
 #include "Player.h"
 #include "RunMan.h"
 #include "Ground.h"
+#include "Rock.h"
 
 
 #include "SampleKeyEventHandler.h"
@@ -33,6 +34,7 @@
 #define ID_TEX_PLAYER_STAND 20
 #define ID_TEX_RUNMAN 30
 #define ID_TEX_GROUND 100
+#define ID_TEX_ROCKMOVE 110
 
 //#define ID_SPRITE_BRICK 20001
 
@@ -42,6 +44,7 @@
 #define TEXTURE_PATH_PLAYER_STAND TEXTURES_DIR "\\bill_stand.png"
 #define TEXTURE_PATH_RUNMAN TEXTURES_DIR "\\run_man.png"
 #define TEXTURE_PATH_GROUND TEXTURES_DIR "\\ground.png"
+#define TEXTURE_PATH_ROCKMOVE TEXTURES_DIR "\\rock_move.png"
 
 #define PLAYER_START_X 10.0f
 #define PLAYER_START_Y 10.0f
@@ -54,9 +57,14 @@
 #define GROUNDX 16.0f
 #define GROUNDY GROUND + 32.0f
 
+#define ROCKMOVE_START_X 10.0f
+#define ROCKMOVE_START_Y 80.0f
+#define ROCKMOVE_START_VY 0.05f
+
 CPlayer* player = NULL;
 CRunMan* runMan;
 CGround* ground;
+CRockMove* rockMove;
 
 CSampleKeyHandler* keyHandler;
 
@@ -88,6 +96,7 @@ void LoadResources()
 	textures->Add(ID_TEX_PLAYER_STAND, TEXTURE_PATH_PLAYER_STAND);
 	textures->Add(ID_TEX_RUNMAN, TEXTURE_PATH_RUNMAN);
 	textures->Add(ID_TEX_GROUND, TEXTURE_PATH_GROUND);
+	textures->Add(ID_TEX_ROCKMOVE, TEXTURE_PATH_ROCKMOVE);
 
 	CSprites* sprites = CSprites::GetInstance();
 	CAnimations* animations = CAnimations::GetInstance();
@@ -198,6 +207,18 @@ void LoadResources()
 	animations->Add(ID_ANI_GROUND, ani);
 
 
+	//TEXROCKMOVE
+
+	LPTEXTURE texRockMove = textures->Get(ID_TEX_ROCKMOVE);
+
+	sprites->Add(10061, 0, 0, 31, 31, texRockMove);
+
+	ani = new CAnimation(100);
+	ani->Add(10061);
+	animations->Add(ID_ANI_ROCKMOVE, ani);
+
+
+
 	for (int i = 0; i < 50; i++)
 	{
 		ground = new CGround(GROUNDX + i * 31, GROUNDY);
@@ -217,7 +238,8 @@ void LoadResources()
 	objects.push_back(player);
 	runMan = new CRunMan(RUNMAN_START_X, RUNMAN_START_Y, RUNMAN_START_VX);
 	objects.push_back(runMan);
-
+	rockMove = new CRockMove(ROCKMOVE_START_X, ROCKMOVE_START_Y, ROCKMOVE_START_VY);
+	objects.push_back(rockMove);
 }
 
 /*
